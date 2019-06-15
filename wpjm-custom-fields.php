@@ -4,7 +4,7 @@
  * Description: Adds an extra Submission Deadline and Submission Instructions fields to WP Job Manager job listings
  * Version: 1.0.0
  * Author: Cameron Gilroy
- * Author URI: http://tilcode.blog/
+ * Author URI: http://celestia.design/
  * Text Domain: wpjm-custom-fields
  * Domain Path: /languages
  *
