@@ -36,7 +36,8 @@ if (!defined('ABSPATH')) {
   add_filter( 'submit_job_form_fields', 'custom_submit_job_form_fields_twitter' );
 
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_submission_deadline_data');
-  add_action('single_job_listing_meta_end', 'gma_wpjmef_display_important_info_data');
+  add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_company_contact_name_data');
+  add_action('single_job_listing_end', 'gma_wpjmef_display_submission_instructions_data', 50);
 // }
 
 function custom_submit_job_form_fields_twitter( $fields ) {
