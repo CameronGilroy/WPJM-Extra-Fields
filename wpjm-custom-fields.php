@@ -43,16 +43,7 @@ function custom_submit_job_form_fields_twitter( $fields ) {
     return $fields;
 }
 
-/**
- * Adds a direct support link under the Plugins Page once the plugin is activated
- **/
-function gma_wpjmef_add_support_link_to_plugin_page($links)
-{
 
-  $links = array_merge(array(
-    '<a href="https://wordpress.org/support/plugin/wpjm-custom-fields" target="_blank">' . __('Support', 'wpjm-custom-fields') . '</a>'
-  ), $links);
-  return $links;
 }
 
 /**
