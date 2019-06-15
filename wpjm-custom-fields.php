@@ -25,11 +25,15 @@ if (!defined('ABSPATH')) {
 
   // add_action('plugin_action_links_' . plugin_basename(__FILE__), 'gma_wpjmef_add_support_link_to_plugin_page');
 
-  add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_salary_field');
-  add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_important_info_field');
+  add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_submission_deadline_field');
+  add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_submission_instructions_field');
+  add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_company_contact_name_field');
 
-  add_filter('job_manager_job_listing_data_fields', 'gma_wpjmef_admin_add_salary_field');
-  add_filter('job_manager_job_listing_data_fields', 'gma_wpjmef_admin_add_important_info_field');
+  add_filter('job_manager_job_listing_data_fields', 'gma_wpjmef_admin_add_submission_deadline_field');
+  add_filter('job_manager_job_listing_data_fields', 'gma_wpjmef_admin_add_submission_instructions_field');
+  add_filter('job_manager_job_listing_data_fields', 'gma_wpjmef_admin_add_company_contact_name_field');
+
+  add_filter( 'submit_job_form_fields', 'custom_submit_job_form_fields_twitter' );
 
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_submission_deadline_data');
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_important_info_data');
@@ -49,7 +53,7 @@ function custom_submit_job_form_fields_twitter( $fields ) {
 /**
  * Adds a new optional "Submission Deadline" text field at the "Submit a Job" form, generated via the [submit_job_form] shortcode
  **/
-function gma_wpjmef_frontend_add_salary_field($fields)
+function gma_wpjmef_frontend_add_submission_deadline_field($fields)
 {
 
   $fields['job']['job_submission_deadline'] = array(
@@ -67,10 +71,10 @@ function gma_wpjmef_frontend_add_salary_field($fields)
 /**
  * Adds a new optional "Submission Instructions" text field at the "Submit a Job" form, generated via the [submit_job_form] shortcode
  **/
-function gma_wpjmef_frontend_add_important_info_field($fields)
+function gma_wpjmef_frontend_add_submission_instructions_field($fields)
 {
 
-  $fields['job']['job_Ssbmission_instructions'] = array(
+  $fields['job']['job_submission_instructions'] = array(
     'label'       => __('Submission Instructions: ', 'wpjm-custom-fields'),
     'type'        => 'textarea',
     'required'    => false,
@@ -82,10 +86,28 @@ function gma_wpjmef_frontend_add_important_info_field($fields)
   return $fields;
 }
 
+  /**
+ * Adds a new optional "Submission Instructions" text field at the "Submit a Job" form, generated via the [submit_job_form] shortcode
+ **/
+function gma_wpjmef_frontend_add_company_contact_name_field($fields)
+{
+
+  $fields['company']['company_contact_name'] = array(
+    'label'       => __('Contact Name: ', 'wpjm-custom-fields'),
+    'type'        => 'text',
+    'required'    => false,
+    'placeholder' => 'John Smith',
+    'description' => '',
+    'priority'    => 1,
+  );
+
+  return $fields;
+}
+
 /**
  * Adds a text field to the Job Listing wp-admin meta box named “Submission Deadline”
  **/
-function gma_wpjmef_admin_add_salary_field($fields)
+function gma_wpjmef_admin_add_submission_deadline_field($fields)
 {
 
   $fields['_job_submission_deadline'] = array(
@@ -101,13 +123,26 @@ function gma_wpjmef_admin_add_salary_field($fields)
 /**
  * Adds a text field to the Job Listing wp-admin meta box named "Submission Instructions"
  **/
-function gma_wpjmef_admin_add_important_info_field($fields)
+function gma_wpjmef_admin_add_submission_instructions_field($fields)
 {
 
   $fields['_job_submission_instructions'] = array(
     'label'       => __('Submission Instructions', 'wpjm-custom-fields'),
     'type'        => 'textarea',
     'placeholder' => 'e.g. Work visa required',
+    'description' => ''
+  );
+
+  return $fields;
+}
+
+function gma_wpjmef_admin_add_company_contact_name_field($fields)
+{
+
+  $fields['_company_contact_name'] = array(
+    'label'       => __('Contact Name', 'wpjm-custom-fields'),
+    'type'        => 'text',
+    'placeholder' => 'John Smith',
     'description' => ''
   );
 
