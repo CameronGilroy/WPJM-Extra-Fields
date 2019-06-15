@@ -157,26 +157,38 @@ function gma_wpjmef_display_job_submission_deadline_data()
 
   global $post;
 
-  $salary = get_post_meta($post->ID, '_job_submission_deadline', true);
-  $important_info = get_post_meta($post->ID, '_job_submission_instructions', true);
+  $submission_deadline = get_post_meta($post->ID, '_job_submission_deadline', true);
 
-  if ($salary) {
-    echo '<li>' . __('Submission Deadline: ') . esc_html($salary) . '</li>';
+  if ($submission_deadline) {
+    echo '<li>' . __('Submission Deadline: ') . esc_html(date("F j, Y", strtotime($submission_deadline))) . '</li>';
+  }
+}
+
+function gma_wpjmef_display_job_company_contact_name_data()
+{
+
+  global $post;
+
+  $company_contact_name = get_post_meta($post->ID, '_company_contact_name', true);
+
+  if ($company_contact_name) {
+    echo '<li>' . __('Contact Name: ') . esc_html($company_contact_name) . '</li>';
   }
 }
 
 /**
  * Displays the content of the "Submission Instructions" text-field on the Single Job Page, by checking if meta for "_job_submission_instructions" exists and is displayed via do_action( 'single_job_listing_meta_end' ) on the template
  **/
-function gma_wpjmef_display_important_info_data()
+function gma_wpjmef_display_submission_instructions_data()
 {
 
   global $post;
 
-  $important_info = get_post_meta($post->ID, '_job_submission_instructions', true);
+  $submission_instructions = get_post_meta($post->ID, '_job_submission_instructions', true);
 
-  if ($important_info) {
-    echo '<li>' . esc_html($important_info) . '</li>';
+  if ($submission_instructions) {
+    echo '<h6 class="please_note">Please note the following:</h6>';
+    echo '<p class="submission_instructions">' . esc_html($submission_instructions) . '</p>';
   }
 }
 
