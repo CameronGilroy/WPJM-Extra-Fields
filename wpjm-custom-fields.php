@@ -34,6 +34,13 @@ if (!defined('ABSPATH')) {
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_submission_deadline_data');
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_important_info_data');
 // }
+
+function custom_submit_job_form_fields_twitter( $fields ) {
+    // in this example, we remove the job_tags field
+    unset($fields['company']['company_twitter']);
+
+    // And return the modified fields
+    return $fields;
 }
 
 /**
