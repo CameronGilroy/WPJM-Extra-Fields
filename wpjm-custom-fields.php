@@ -54,7 +54,7 @@ function gma_wpjmef_frontend_add_salary_field($fields)
 
   $fields['job']['job_submission_deadline'] = array(
     'label'       => __('Submission Deadline', 'wpjm-custom-fields'),
-    'type'        => 'text',
+    'type'        => 'date',
     'required'    => false,
     'placeholder' => '12/23/2019 or ASAP',
     'description' => '',
