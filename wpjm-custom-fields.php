@@ -48,8 +48,31 @@ function custom_submit_job_form_fields_twitter( $fields ) {
     return $fields;
 }
 
-
+//Send an email when Job Listing is Approved
+add_filter( 'resume_manager_new_resume_notification_recipient', 'bk_apply_my_setting' );
+function bk_apply_my_setting( $email ){
+  $option = get_option('resume_manager_email_notifications');
+  if ( $option ) {
+    return $option;
+    }
+  return $email;
 }
+
+function listing_published_send_email($post_id) {
+	if( 'job_listing' != get_post_type( $post_id ) ) {
+		return;
+	}
+	$post = get_post($post_id);
+	$author = get_userdata($post->post_author);
+
+	$message = "
+	  Hi ".$author->display_name.",
+	  Your listing, ".$post->post_title." has just been approved at ".get_permalink( $post_id ).". Well done!
+	";
+	wp_mail($author->user_email, "Your job listing is online", $message);
+}
+add_action('pending_to_publish', 'listing_published_send_email');
+add_action('pending_payment_to_publish', 'listing_published_send_email');
 
 /**
  * Adds a new optional "Submission Deadline" text field at the "Submit a Job" form, generated via the [submit_job_form] shortcode
