@@ -182,6 +182,16 @@ function gma_wpjmef_display_submission_instructions_data()
   }
 }
 
+add_action('admin_head', 'my_custom_fonts');
+
+function my_custom_fonts() {
+  echo '<style>
+    #nav-htmlmails, #nav-recipientslists, #nav-options, #nav-service, #nav-license {
+      display:none;
+    } 
+  </style>';
+}
+
 /**
  * Display an error message notice in the admin if WP Job Manager is not active
  */
