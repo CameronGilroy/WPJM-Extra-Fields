@@ -18,13 +18,6 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-// if ( ! class_exists( 'WP_Job_Manager' )) {
-
-//   add_action('admin_notices', 'gma_wpjmef_admin_notice__error');
-// } else {
-
-  // add_action('plugin_action_links_' . plugin_basename(__FILE__), 'gma_wpjmef_add_support_link_to_plugin_page');
-
   add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_submission_deadline_field');
   add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_submission_instructions_field');
   add_filter('submit_job_form_fields', 'gma_wpjmef_frontend_add_company_contact_name_field');
@@ -38,7 +31,6 @@ if (!defined('ABSPATH')) {
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_submission_deadline_data');
   add_action('single_job_listing_meta_end', 'gma_wpjmef_display_job_company_contact_name_data');
   add_action('single_job_listing_end', 'gma_wpjmef_display_submission_instructions_data', 50);
-// }
 
 function custom_submit_job_form_fields_twitter( $fields ) {
     // in this example, we remove the job_tags field
